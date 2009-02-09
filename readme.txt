@@ -4,7 +4,7 @@ Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
 Tested up to: 2.7
 Stable tag: 0.01
-Add an image and favicon to your RSS and Atom feeds!
+Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
 
