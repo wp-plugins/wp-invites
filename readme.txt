@@ -25,6 +25,10 @@ Wordpress MU and Buddypress compatible.
 If you don't rate my plugin as 5/5 - please write why - and I will change plugin, add options and fix bugs. It's very unpleasant to see silient low rates.  
 If you don't understand what plugin does - also don't rate it ;)
 
+####Questions
+If you have troubles with m plugin, need more details, or have suggestions - please visit
+
+http://jehy.ru/articles/2009/02/09/wordpress-plugins/#comments 
 == Installation ==
 For simple wordpress:
 1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory
