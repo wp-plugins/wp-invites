@@ -17,7 +17,7 @@ if (!defined('PLUGIN_URL'))
 if (!defined('PLUGIN_PATH'))
     define('PLUGIN_PATH', WP_CONTENT_DIR . '/plugins/');
 
-DEFINE('BP_INVITES_VERSION', '0.01' );
+DEFINE('BP_INVITES_VERSION', '0.1' );
 DEFINE('BP_INVITES_INVITE_LENGTH',12);#invite code length
 DEFINE('BP_INVITES_INVITE_SPLIT',4);#visual split, number of characters
 DEFINE('BP_INVITES_DEFNUM',50);#default number of invite codes to be generated
