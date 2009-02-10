@@ -23,7 +23,7 @@ Wordpress MU and Buddypress compatible.
 * Russian - by [Slaffik](http://cosydale.com/)
 
 ####Attention!
-This plugin only denies new registrations from strangers. If you need to make your blog really private, you should restrict viewing [with Registeres-Users-Only-2 plugin](http://wordpress.org/extend/plugins/registered-users-only-2/) or somewhat alike.
+This plugin only denies new registrations from strangers. If you need to make your blog really private, you should restrict viewing [with Registered-Users-Only-2 plugin](http://wordpress.org/extend/plugins/registered-users-only-2/) or somewhat alike.
 
 ####Questions
 If you have troubles with my plugin, need more details, or have suggestions - please visit [my blog](http://jehy.ru/articles/2009/02/09/wordpress-plugins/#comments) for more info.
