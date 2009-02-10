@@ -36,18 +36,18 @@ If you don't understand what plugin does - also don't rate it ;)
 Please look instructions on the [installation page ^_^](http://wordpress.org/extend/plugins/wp-invites/installation/).
 
 == Installation ==
-For simple wordpress:
-1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory  
-3. Activate the plugin through the 'Plugins' menu in WordPress  
-2. Get activation codes through Plugins-&gt;WP-invites link.  
-4. Enjoy
+For simple wordpress:  
+1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory;  
+3. Activate the plugin through the 'Plugins' menu in WordPress;  
+2. Get activation codes through Plugins-&gt;WP-invites link;  
+4. Enjoy.
   
   
 For Wordpress MU and Buddypress:  
-1. Upload the complete folder `wp-invites` to the `/mu-plugins/` directory  
-2. Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`  
-3. Get activation codes through Site admin-&gt;WP-invites link.  
-4. Enjoy
+1. Upload the complete folder `wp-invites` to the `/mu-plugins/` directory;  
+2. Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`;  
+3. Get activation codes through Site admin-&gt;WP-invites link;  
+4. Enjoy.
 
 == Frequently Asked Questions ==
 
