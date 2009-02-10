@@ -2,11 +2,12 @@
 /*
 Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
-Description: Invites system for wordpress, wordpress MU and buddypress
-Author: jehy
-Version: 0.1
+Description: Invites system for wordpress, wordpress MU and buddypress!
+Author: Jehy
+Version: 0.2
 Author URI: http://jehy.en.html
 */
+/*
 if ( !defined('WP_CONTENT_URL') )
     define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
 if ( !defined('WP_CONTENT_DIR') )
@@ -16,13 +17,14 @@ if (!defined('PLUGIN_URL'))
     define('PLUGIN_URL', WP_CONTENT_URL . '/plugins/');
 if (!defined('PLUGIN_PATH'))
     define('PLUGIN_PATH', WP_CONTENT_DIR . '/plugins/');
+*/
 
-DEFINE('BP_INVITES_VERSION', '0.01' );
-DEFINE('BP_INVITES_INVITE_LENGTH',12);#invite code length
-DEFINE('BP_INVITES_INVITE_SPLIT',4);#visual split, number of characters
-DEFINE('BP_INVITES_DEFNUM',50);#default number of invite codes to be generated
-DEFINE('BP_INVITES_CHARS','1234567890qwertyuiopasdfghjklzxcvbnm');#symbols used in code
-DEFINE('INVITES_REMOVE_INTERVAL','30');#symbols used in code
+DEFINE('WP_INVITES_VERSION', '0.2' );
+DEFINE('WP_INVITES_INVITE_LENGTH',12);#invite code length
+DEFINE('WP_INVITES_INVITE_SPLIT',4);#visual split, number of characters
+DEFINE('WP_INVITES_DEFNUM',50);#default number of invite codes to be generated
+DEFINE('WP_INVITES_CHARS','1234567890qwertyuiopasdfghjklzxcvbnm');#symbols used in code
+DEFINE('WP_INVITES_REMOVE_INTERVAL','30');#time after which we remove invite code from base
 
 if (function_exists('is_site_admin'))
 	DEFINE('IS_WPMU',1);
@@ -48,8 +50,17 @@ function invites_init()
 
 add_action('init', 'invites_init');
 
-if ( file_exists( PLUGIN_PATH . 'wp-invites/langs/wp-invites-' . get_locale() . '.mo' ) )
-	load_textdomain( 'wp-invites', PLUGIN_PATH . 'wp-invites/langs/wp-invites-' . get_locale() . '.mo' );
+if(IS_WPMU)
+{	
+if ( file_exists( ABSPATH . 'wp-content/mu-plugins/wp-invites/langs/wp-invites-' . get_locale() . '.mo' ) )
+	load_textdomain( 'wp-invites', ABSPATH . 'wp-content/mu-plugins/wp-invites/langs/wp-invites-' . get_locale() . '.mo' );
+
+}
+else#not MU
+{
+	if (function_exists('load_plugin_textdomain')) 
+		load_plugin_textdomain('wp-invites', null, 'wp-invites/langs');
+}
 	
 function invites_ifreal($val)#check if it's a real invite code
 {global $wpdb;
@@ -69,7 +80,7 @@ function invites_unbeautify($str)
 
 function invites_beautify($str)
 {
-	return implode('-',str_split($str,BP_INVITES_INVITE_SPLIT));
+	return implode('-',str_split($str,WP_INVITES_INVITE_SPLIT));
 }
 
 /* Functions for handling the admin area tabs for administrators */
@@ -87,8 +98,8 @@ function invites_add($val)#add invite... ))
 function invites_make()#make new code
 {global $wpdb;
 	$str='';
-	$chars=BP_INVITES_CHARS;
-	for($i=0;$i<BP_INVITES_INVITE_LENGTH;$i++)
+	$chars=WP_INVITES_CHARS;
+	for($i=0;$i<WP_INVITES_INVITE_LENGTH;$i++)
 		$str.=$chars[rand(0,strlen($chars)-1)];
 	
 	#paranoid check
@@ -113,9 +124,9 @@ if($_REQUEST['invites_admin_submit'])
 		echo '<br>'.invites_beautify($invite);
 	}?></div><?php
 }
-?><div class="form-table" style="width:70%; border:1px solid #666; padding:10px; background-color:#CECECE;margin:10px;";><p style="text-align:left;"><?php _e('Please, choose, how many invitation codes you are going to generate. After generation, please write down them somewhere - you will not be able to view them after it. Later, codes will be either assigned to registered users, or disapperar after a period of time. Do not worry about invite code brute forcing. Code has a length of', 'wp-invites') ?> <?php echo BP_INVITES_INVITE_LENGTH ?> <?php _e(' chars, and is combined from', 'wp-invites') ?> <?php echo strlen(BP_INVITES_CHARS) ?> <?php _e(' different chars, and, if not activated, is being removed after', 'wp-invites') ?> <?php echo INVITES_REMOVE_INTERVAL;?> <?php _e(' days.', 'wp-invites') ?></p>
+?><div class="form-table" style="width:70%; border:1px solid #666; padding:10px; background-color:#CECECE;margin:10px;";><p style="text-align:left;"><?php _e('Please, choose, how many invitation codes you are going to generate. After generation, please write down them somewhere - you will not be able to view them after it. Later, codes will be either assigned to registered users, or disapperar after a period of time. Do not worry about invite code brute forcing. Code has a length of', 'wp-invites') ?> <?php echo WP_INVITES_INVITE_LENGTH ?> <?php _e(' chars, and is combined from', 'wp-invites') ?> <?php echo strlen(WP_INVITES_CHARS) ?> <?php _e(' different chars, and, if not activated, is being removed after', 'wp-invites') ?> <?php echo WP_INVITES_REMOVE_INTERVAL;?> <?php _e(' days.', 'wp-invites') ?></p>
 	<form method="post" action="<?php echo $location;?>">
-	<input type="text" name="invites_num" value="<?=BP_INVITES_DEFNUM;?>"><input type="submit" name="invites_admin_submit" value="<?php _e('Generate', 'wp-invites') ?>"></form></div>
+	<input type="text" name="invites_num" value="<?=WP_INVITES_DEFNUM;?>"><input type="submit" name="invites_admin_submit" value="<?php _e('Generate', 'wp-invites') ?>"></form></div>
 </div><?php
 }
 
@@ -163,7 +174,7 @@ else
 
 function invites_validate_signup_fields( $result )
 {global $user_name,$user_email,$wpdb,$InviteErrors;
-	$sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `datetime` < NOW() - INTERVAL '.INVITES_REMOVE_INTERVAL.' DAY';
+	$sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `datetime` < NOW() - INTERVAL '.WP_INVITES_REMOVE_INTERVAL.' DAY';
 	$wpdb->query($sql);
 	echo mysql_error();
 	if($_REQUEST['invite_code'])
@@ -217,15 +228,15 @@ else
 
 add_action( 'admin_menu', 'invites_add_admin_menu' );
 
-function setup_bp_invites()
+function setup_WP_INVITES()
 {global $bp;
 if( $bp['current_component'] == 'profile'&&$bp['current_action']=='public'&&$bp['current_userid'])
 {
-	add_action('loop_start','output_bp_invites',3);
+	add_action('loop_start','output_WP_INVITES',3);
 }
 }
 
-function output_bp_invites()
+function output_WP_INVITES()
 {global $wpdb,$bp;
 $code=invites_beautify(get_usermeta($bp['current_userid'],'invite_code'));
 if(!$code)
@@ -265,6 +276,6 @@ add_action('show_user_profile','output_invites',99);
 add_action('edit_user_profile','output_invites',99);
 
 if(IS_BUDDYPRESS)
-	add_action('wp','setup_bp_invites',99);
+	add_action('wp','setup_WP_INVITES',99);
 
 ?>
