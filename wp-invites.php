@@ -230,7 +230,7 @@ add_action( 'admin_menu', 'invites_add_admin_menu' );
 
 function setup_WP_INVITES()
 {global $bp;
-if( $bp['current_component'] == 'profile'&&$bp['current_action']=='public'&&$bp['current_userid'])
+if( $bp->current_component == 'profile'&&$bp->current_action=='public'&&$bp->current_userid)
 {
 	add_action('loop_start','output_WP_INVITES',3);
 }
@@ -238,7 +238,7 @@ if( $bp['current_component'] == 'profile'&&$bp['current_action']=='public'&&$bp[
 
 function output_WP_INVITES()
 {global $wpdb,$bp;
-$code=invites_beautify(get_usermeta($bp['current_userid'],'invite_code'));
+$code=invites_beautify(get_usermeta($bp->current_userid,'invite_code'));
 if(!$code)
 	$code=_e('No code assigned', 'wp-invites');
 if(is_site_admin())
