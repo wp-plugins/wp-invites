@@ -4,7 +4,7 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 0.2
+Version: 0.3
 Author URI: http://jehy.en.html
 */
 /*
