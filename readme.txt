@@ -15,7 +15,7 @@ Wordpress MU and Buddypress compatible.
 ####History
 
 0.1 - First release  
-0.2 - Activation and language issues with wordpress MU fixed
+0.2 - Activation and language issues with wordpress MU fixed  
 0.3 - Updated to work with the latest BuddyPress system
 
 ####Localization
