@@ -36,6 +36,9 @@ If you don't understand what plugin does - also don't rate it ;)
 ###Installation
 Please look instructions on the [installation page ^_^](http://wordpress.org/extend/plugins/wp-invites/installation/).
 
+####Donate? Just a link!
+If you liked this plugin - please write a review or just put somewhere a link to [plugin homepage](http://jehy.ru/articles/2009/02/09/wordpress-plugins/#comments) - it will be quite enough for a "thanks" ^_^
+
 == Installation ==
 For simple wordpress:  
 1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory;  
