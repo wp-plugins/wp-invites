@@ -3,7 +3,7 @@ Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
 Tested up to: 2.7
-Stable tag: 0.3
+Stable tag: 0.4
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
@@ -16,7 +16,8 @@ Wordpress MU and Buddypress compatible.
 
 0.1 - First release  
 0.2 - Activation and language issues with wordpress MU fixed  
-0.3 - Updated to work with the latest BuddyPress system
+0.3 - Updated to work with the latest BuddyPress system   
+0.4 - Defined str_split function for compatibility with PHP4
 
 ####Localization
 

@@ -4,7 +4,7 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 0.3
+Version: 0.4
 Author URI: http://jehy.en.html
 */
 /*
@@ -19,7 +19,7 @@ if (!defined('PLUGIN_PATH'))
     define('PLUGIN_PATH', WP_CONTENT_DIR . '/plugins/');
 */
 
-DEFINE('WP_INVITES_VERSION', '0.2' );
+DEFINE('WP_INVITES_VERSION', '0.4' );
 DEFINE('WP_INVITES_INVITE_LENGTH',12);#invite code length
 DEFINE('WP_INVITES_INVITE_SPLIT',4);#visual split, number of characters
 DEFINE('WP_INVITES_DEFNUM',50);#default number of invite codes to be generated
@@ -278,4 +278,11 @@ add_action('edit_user_profile','output_invites',99);
 if(IS_BUDDYPRESS)
 	add_action('wp','setup_WP_INVITES',99);
 
+if(!function_exists('str_split'))
+{
+function str_split($str, $l=1) {
+  $str_array = explode("\r\n", chunk_split($str,$l));
+  return $str_array;
+}
+}
 ?>
