@@ -23,7 +23,7 @@ Wordpress MU and Buddypress compatible.
 
 * English
 * Russian - by [Slaffik](http://cosydale.com/)
-* Belarusian - by [Marcis Gasuns](www.comfi.com)
+* Belarusian - by [Marcis Gasuns](http://www.ippavloff.ru/)
 
 ####Attention!
 This plugin only denies new registrations from strangers. If you need to make your blog really private, you should restrict viewing [with Registered-Users-Only-2 plugin](http://wordpress.org/extend/plugins/registered-users-only-2/) or somewhat alike.
