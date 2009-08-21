@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: wp-invites 0.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-09 19:51+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Вячеслав @ Cosydale.com <slaffik@list.ru>\n"
+"Language-Team: CosyDale.com <slaffik@list.ru>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+"X-Poedit-Country: RUSSIAN FEDERATION\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: W:\\home\\test1.ru\\wp-invites\n"
+"X-Poedit-KeywordsList: __ngettext_noop:1,2;__ngettext:1,2;__;_e;_c;_n_noop:1,2\n"
+"X-Poedit-SearchPath-0: W:\\home\\test1.ru\\wp27mu\\wp-content\\plugins\\wp-invites\n"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:108
+msgid "Generated invitation codes:"
+msgstr "Сгенерированные коды приглашения:"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:116
+msgid "Please, choose, how many invitation codes you are going to generate. After generation, please write down them somewhere - you will not be able to view them after it. Later, codes will be either assigned to registered users, or disapperar after a period of time. Do not worry about invite code brute forcing. Code has a length of"
+msgstr "Выберите количество кодов приглашений, которое вы хотите сгенерировать. После генерации, запишите эти коды или распечатайте - больше они показаны в администрировании не будут - или пользователи зарегистрируются и коды будут показаны в профиле, или они будут удалены со временем.<br><br>Не стоит беспокоиться о том, что кто-то сможет подобрать код приглашения. Код приглашения имеет длину"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:116
+msgid " chars, and is combined from"
+msgstr " символов, может содержать комбинации из"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:116
+msgid " different chars, and, if not activated, is being removed after"
+msgstr " символов, и, если не активирован, удаляется в течение"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:116
+msgid " days."
+msgstr " дней."
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:118
+msgid "Generate"
+msgstr "Генерировать"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:151
+msgid "Invite code"
+msgstr "Код приглашения"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:152
+msgid "Please, input here invitation code, received from the blog owner"
+msgstr "Пожалуйста, введите здесь код приглашения, полученный Вами от владельца блога."
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:176
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:180
+msgid "<b>Error:</b>Wrong invite code"
+msgstr "<b>ОШИБКА:</b>Неправильный код приглашения"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:232
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:249
+msgid "No code assigned"
+msgstr "Код отсутствует"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:239
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:257
+msgid "Code"
+msgstr "Код"
+
+#: W:\home\test1.ru\wp27mu\wp-content\plugins\wp-invites/wp-invites.php:253
+msgid "Invitation code"
+msgstr "Код приглашения"
+
