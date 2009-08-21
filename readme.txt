@@ -2,14 +2,14 @@
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
-Tested up to: 2.7
-Stable tag: 0.4
+Tested up to: 2.8.4
+Stable tag: 1.0
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
 
 Stop any strangers from entering your blog! Only the ones who received invitation code will be able to register.
-Wordpress MU and Buddypress compatible.
+Wordpress, Wordpress MU and Buddypress compatible.
 
 
 ####History
@@ -17,7 +17,8 @@ Wordpress MU and Buddypress compatible.
 0.1 - First release  
 0.2 - Activation and language issues with wordpress MU fixed  
 0.3 - Updated to work with the latest BuddyPress system   
-0.4 - Defined str_split function for compatibility with PHP4
+0.4 - Defined str_split function for compatibility with PHP4   
+1.0 - Many different fixes, including usernames's replacing and error reporting
 
 ####Localization
 
