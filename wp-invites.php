@@ -137,7 +137,7 @@ function invites_install() {
 	global $bp, $wpdb;
 
 	if ( !empty($wpdb->charset) )
-		$charset_collate = 'DEFAULT CHARACTER SET '.$wpdb->charset;
+		$charset_collate = ' DEFAULT CHARACTER SET '.$wpdb->charset;
 	
 	$sql = 'CREATE TABLE '.INVITES_PREFIX.'invites (
 			 `id` int(11) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -149,8 +149,13 @@ function invites_install() {
 	if($result===FALSE)#possibly, mysql 3 or 4, does not support encoding parameter 
 	{
 		$sql.=';';
-		$wpdb->query($sql);
-		echo '<font color="red">WP invites table could not be installed! Please check database permissions. Error:<br>'.mysql_error().'</font>';
+		$result=$wpdb->query($sql);
+		f($result===FALSE)
+		{
+			echo '<font color="red">WP invites table could not be installed! Please check database permissions. <br><b>Query:</b><br> '.$sql.'<br><b>Error:</b>';
+			$wpdb->print_error();
+			echo '</font>';
+		}
 	}
 }
 
