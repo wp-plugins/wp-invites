@@ -139,16 +139,16 @@ function invites_install() {
 	if ( !empty($wpdb->charset) )
 		$charset_collate = ' DEFAULT CHARACTER SET '.$wpdb->charset;
 	
-	$sql = 'CREATE TABLE '.INVITES_PREFIX.'invites (
+	$sql1 = 'CREATE TABLE '.INVITES_PREFIX.'invites (
 			 `id` int(11) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
 			 `value` varchar(255) NOT NULL,
 			 `datetime` datetime default NULL
 	)';
-	$sql.=$charset_collate.';';
+	$sql=$sql1.$charset_collate.';';
 	$result=$wpdb->query($sql);
 	if($result===FALSE)#possibly, mysql 3 or 4, does not support encoding parameter 
 	{
-		$sql.=';';
+		$sql=$sql1.';';
 		$result=$wpdb->query($sql);
 		f($result===FALSE)
 		{
