@@ -150,7 +150,7 @@ function invites_install() {
 	{
 		$sql=$sql1.';';
 		$result=$wpdb->query($sql);
-		f($result===FALSE)
+		if($result===FALSE)
 		{
 			echo '<font color="red">WP invites table could not be installed! Please check database permissions. <br><b>Query:</b><br> '.$sql.'<br><b>Error:</b>';
 			$wpdb->print_error();
