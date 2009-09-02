@@ -114,8 +114,11 @@ function invites_make()#make new code
 function invites_admin( $message = '', $type = 'error' )
 {
 global $wpdb,$_REQUEST;
-if ( ( $wpdb->get_var('show tables like "'.INVITES_PREFIX.'invites"') == false ))
+if ( ( $wpdb->get_var('show tables like "'.INVITES_PREFIX.'invites"') == null ))
+{
+	echo '<br>No MySQL table found. Installing...';
 	invites_install();
+}
 ?><div align="center"><?php
 if($_REQUEST['invites_admin_submit'])
 {
