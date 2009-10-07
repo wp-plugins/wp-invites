@@ -4,19 +4,8 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 1.1
+Version: 1.2
 Author URI: http://jehy.ru/index.en.html
-*/
-/*
-if ( !defined('WP_CONTENT_URL') )
-    define( 'WP_CONTENT_URL', get_option('siteurl') . '/wp-content');
-if ( !defined('WP_CONTENT_DIR') )
-    define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-
-if (!defined('PLUGIN_URL'))
-    define('PLUGIN_URL', WP_CONTENT_URL . '/plugins/');
-if (!defined('PLUGIN_PATH'))
-    define('PLUGIN_PATH', WP_CONTENT_DIR . '/plugins/');
 */
 if(!function_exists('str_split'))
 {
@@ -26,14 +15,14 @@ function str_split($str, $l=1) {
 }
 }
 
-DEFINE('WP_INVITES_VERSION', '0.4' );
+DEFINE('WP_INVITES_VERSION', '1.2' );
 DEFINE('WP_INVITES_INVITE_LENGTH',12);#invite code length
 DEFINE('WP_INVITES_INVITE_SPLIT',4);#visual split, number of characters
 DEFINE('WP_INVITES_DEFNUM',50);#default number of invite codes to be generated
 DEFINE('WP_INVITES_CHARS','1234567890qwertyuiopasdfghjklzxcvbnm');#symbols used in code
 DEFINE('WP_INVITES_REMOVE_INTERVAL','30');#time after which we remove invite code from base
 
-if (function_exists('is_site_admin'))
+if ( function_exists('is_site_admin'))
 	DEFINE('IS_WPMU',1);
 else
 	DEFINE('IS_WPMU',0);
@@ -47,8 +36,6 @@ if(IS_WPMU)
 	DEFINE('INVITES_PREFIX',$wpdb->base_prefix);
 else
 	DEFINE('INVITES_PREFIX',$wpdb->prefix);
-
-//$InviteErrors=new WP_Error();
 
 function invites_init()
 {
@@ -106,7 +93,7 @@ function invites_make()#make new code
 		$str.=$chars[rand(0,strlen($chars)-1)];
 	
 	#paranoid check
-	if(invites_ifreal($str))#if sucj code already exists in base, generate new
+	if(invites_ifreal($str))#if such code already exists in base, generate new
 		$str=invites_make();
 	return $str;
 }
@@ -155,9 +142,9 @@ function invites_install() {
 		$result=$wpdb->query($sql);
 		if($result===FALSE)
 		{
-			echo '<font color="red">WP invites table could not be installed! Please check database permissions. <br><b>Query:</b><br> '.$sql.'<br><b>Error:</b>';
+			echo '<p class="error">WP invites table could not be installed! Please check database permissions. <br><b>Query:</b><br> '.$sql.'<br><b>Error:</b>';
 			$wpdb->print_error();
-			echo '</font>';
+			echo '</p>';
 		}
 	}
 }
@@ -166,11 +153,11 @@ function invites_install() {
 /* Functions to handle the modification and saving of signup pages */
 
 
-function invites_add_signup_fields() {
-	global $errors;
+function invites_add_signup_fields($errors) {
+	//print_R($errors);die;
 	$error = $errors->get_error_message('wp_invites_error');
-	//if($error)
-	//	echo '<div style="background-color:red;color:#000000;">' . $error . '</div>';
+	if($error)
+		echo '<p class="error">' . $error . '</p>';
 	?>
 	<p>
 		<label><?php _e('Invite code', 'wp-invites') ?><br>
@@ -189,30 +176,20 @@ width:97%;"></label>
 }
 
 function invites_validate_signup_fields( $result )
-{global $user_name,$user_email,$wpdb,$errors;
-	// $errors is a global variable. However, it may not work in simple (not MU) wordpress...
-	$sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `datetime` < NOW() - INTERVAL '.WP_INVITES_REMOVE_INTERVAL.' DAY';//remove old codes
-	$wpdb->query($sql);
-	//echo mysql_error();
-	if($_REQUEST['invite_code'])
-		$_SESSION['invite_code']=$_REQUEST['invite_code'];
-	
-	if(IS_WPMU)
-	{
-		extract($result);
-		if(!invites_ifreal(invites_unbeautify($_SESSION['invite_code'])))
-		{
-			$errors->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );
-			$result = array('user_name' => $user_name, 'user_email' => $user_email,	'errors' => $errors);
-			
-		}
-	}
+{global $wpdb;
+  $sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `datetime` < NOW() - INTERVAL '.WP_INVITES_REMOVE_INTERVAL.' DAY';//remove old codes
+  $wpdb->query($sql);
+  //echo mysql_error();
+  if($_REQUEST['invite_code'])
+  $_SESSION['invite_code']=$_REQUEST['invite_code'];
+  
+  if(!invites_ifreal(invites_unbeautify($_SESSION['invite_code'])))
+  {
+    if(IS_WPMU)
+	  $result['errors']->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );
 	else
-	{
-		if(!invites_ifreal(invites_unbeautify($_SESSION['invite_code'])))
-			$result->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );
-		
-	}
+	  $result->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );		
+  }
 	return $result;
 }
 
@@ -293,14 +270,14 @@ if(IS_BUDDYPRESS)
 
 if(IS_WPMU)
 {
-	add_action( 'signup_extra_fields', 'invites_add_signup_fields',1);
+	add_action( 'signup_extra_fields', 'invites_add_signup_fields');
 	add_filter( 'wpmu_validate_user_signup', 'invites_validate_signup_fields',99,1);
 	add_filter( 'wpmu_activate_user','invites_on_activate_user');
 
 }
 else
 {
-	add_action('register_form', 'invites_add_signup_fields',1);
+	add_action('register_form', 'invites_add_signup_fields');
 	add_filter( 'registration_errors', 'invites_validate_signup_fields',99,1);
 	add_filter( 'user_register', 'invites_on_activate_user');
 }
