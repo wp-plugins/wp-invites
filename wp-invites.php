@@ -4,7 +4,7 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 1.2
+Version: 1.3
 Author URI: http://jehy.ru/index.en.html
 */
 if(!function_exists('str_split'))
@@ -153,9 +153,13 @@ function invites_install() {
 /* Functions to handle the modification and saving of signup pages */
 
 
-function invites_add_signup_fields($errors) {
+function invites_add_signup_fields($errors_mu) {
+	global $errors;
 	//print_R($errors);die;
-	$error = $errors->get_error_message('wp_invites_error');
+	if(IS_WPMU)
+		$error = $errors_mu->get_error_message('wp_invites_error');
+	else
+		$error = $errors->get_error_message('wp_invites_error');
 	if($error)
 		echo '<p class="error">' . $error . '</p>';
 	?>
