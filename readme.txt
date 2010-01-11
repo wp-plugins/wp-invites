@@ -2,12 +2,16 @@
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
-Tested up to: 2.8.5
-Stable tag: 1.3
+Tested up to: 2.9.1
+Stable tag: 2.0
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
 
+####NEW!!!
+Now you can configure different plugin options - separators, number of chars to be used for code generation, code working time and much more! Also, now you can add codes manually and view added codes.
+
+####Description
 Stop any strangers from entering your blog! Only the ones who received invitation code will be able to register.
 Wordpress, Wordpress MU and Buddypress compatible.
 
@@ -21,7 +25,9 @@ Wordpress, Wordpress MU and Buddypress compatible.
 1.0 - Many different fixes, including usernames's replacing and error reporting   
 1.1 - Fixed broken compatibility mode for MySQL 4, added some error reporting    
 1.2 - Crytical upgrade for WP MU (not for simple wordpress), install as soon as possible.    
-1.3 - Fixed registration incompatibility issues.
+1.3 - Fixed registration incompatibility issues.    
+
+2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.
 
 ####Localization
 
@@ -46,16 +52,16 @@ Please look instructions on the [installation page ^_^](http://wordpress.org/ext
 If you want to ensure the future development and support of this plugin, you can make donation [on this page](http://jehy.ru/donate.en.html).
 
 == Installation ==
-For simple wordpress:  
+Usually:  
 1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory;  
 3. Activate the plugin through the 'Plugins' menu in WordPress;  
-2. Get activation codes through Plugins-&gt;WP-invites link;  
+2. Get activation codes through Plugins-&gt;WP-invites (Site admin-&gt;WP-invites for WP MU) link;  
 4. Enjoy.
   
   
-For Wordpress MU and Buddypress:  
+For old versions of Wordpress MU and Buddypress:  
 1. Upload the complete folder `wp-invites` to the `/mu-plugins/` directory;  
-2. Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`;  
+2. For OLD wordpress MU versions only: Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`;  
 3. Get activation codes through Site admin-&gt;WP-invites link;  
 4. Enjoy.
 
