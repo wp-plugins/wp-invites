@@ -52,6 +52,9 @@ Please look instructions on the [installation page ^_^](http://wordpress.org/ext
 ####Donate?
 If you want to ensure the future development and support of this plugin, you can make donation [on this page](http://jehy.ru/donate.en.html).
 
+####Thanks
+Thanks to Floris from [Members of Staff](http://membersofstaff.org) for improvement suggentions and a huge donation ^_^
+
 == Installation ==
 Usually:  
 1. Upload the complete folder `wp-invites` to the `/wp-content/plugins/` directory;  
