@@ -65,7 +65,7 @@ Usually:
   
 For old versions of Wordpress MU and Buddypress:  
 1. Upload the complete folder `wp-invites` to the `/mu-plugins/` directory;  
-2. For OLD wordpress MU versions only: Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`;  
+2. Put file `wp-invites-MU_INIT.php` from `wp-invites` to upper directory, `mu-plugins`;  
 3. Get activation codes through Site admin-&gt;WP-invites link;  
 4. Enjoy.
 
