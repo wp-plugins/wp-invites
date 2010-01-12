@@ -33,7 +33,7 @@ Wordpress, Wordpress MU and Buddypress compatible.
 
 * English
 * Russian - by [Slaffik](http://cosydale.com/)
-* Belarusian - by [Marcis Gasuns](http://www.ippavloff.ru/)
+* Belarusian - by [Marcis Gasuns](http://www.ippavloff.ru/)    
 In 2.0 version, localization is messed a bit - I didn't have time to update it. If you need wp-invites in your language - just ask, and I'll make neccessary update.
 
 ####Attention!
