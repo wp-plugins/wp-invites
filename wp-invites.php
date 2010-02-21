@@ -4,7 +4,7 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 2.0
+Version: 2.1
 Author URI: http://jehy.ru/index.en.html
 */
 if(!function_exists('str_split'))
@@ -260,6 +260,15 @@ function invites_on_activate_user( $user_id, $password='', $meta='')
 	update_usermeta( $user_id, 'invite_code',$meta['invite_code']);
 }
 
+function wp_invites_on_activate_user( $user_id)
+{global $wpdb;
+
+  $sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `value`="'.invites_unbeautify($_SESSION['invite_code']).'"';
+  $wpdb->query($sql);
+  echo mysql_error();
+	update_usermeta( $user_id, 'invite_code',$_SESSION['invite_code']);
+}
+
 function bp_invites_on_activate_user($meta='',$key='')
 {
 	update_usermeta( $meta['user_id'], 'invite_code',$meta['meta']['invite_code']);
@@ -284,7 +293,13 @@ function wp_output_invites($user)
 $code=invites_beautify(get_usermeta($user->ID,'invite_code'));
 if(!$code)
 	$code=__('No code assigned', 'wp-invites');
-if(is_site_admin()||(get_current_user_id()==$user->ID))
+if(
+  !function_exists('is_site_admin')||
+  (
+    is_site_admin()||
+    (get_current_user_id()==$user->ID)
+  )
+  )
 {
 ?><table class="form-table">
 <tr>
@@ -338,10 +353,6 @@ if(constant('IS_WPMU'))
 {
   #for WPMU and buddypress
 
-  #output in wp innerpanel
-  add_action( 'show_user_profile', 'wp_output_invites',99,1);
-  add_action( 'edit_user_profile', 'wp_output_invites',99,1);
-
   #validate signup for wpmu and buddy
 	add_filter( 'wpmu_validate_user_signup', 'invites_validate_signup_fields',99,1);
 
@@ -373,7 +384,10 @@ else#for simple wordpress
 {
 	add_action('register_form', 'invites_add_signup_fields');
 	add_filter( 'registration_errors', 'invites_validate_signup_fields',99,1);
-	#add_filter( 'user_register', 'invites_on_activate_user');
+	add_action( 'user_register', 'wp_invites_on_activate_user');
 }
 add_action( 'admin_menu', 'invites_add_admin_menu');
+  #output in wp innerpanel
+add_action( 'show_user_profile', 'wp_output_invites',99,1);
+add_action( 'edit_user_profile', 'wp_output_invites',99,1);
 ?>
