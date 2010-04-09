@@ -4,7 +4,7 @@ Plugin Name: WP-invites
 Plugin URI: http://jehy.ru/wp-plugins.en.html
 Description: Invites system for wordpress, wordpress MU and buddypress!
 Author: Jehy
-Version: 2.1
+Version: 2.21
 Author URI: http://jehy.ru/index.en.html
 */
 if(!function_exists('str_split'))
@@ -278,7 +278,11 @@ function invites_add_admin_menu()
 {
 global $wpdb, $bp;
 
-if(IS_WPMU)
+if(constant('IS_BUDDYPRESS'))
+{
+   add_submenu_page( 'bp-general-settings', 'WP-invites', 'WP-invites', 8, "manage_invites", "invites_admin" );
+}
+else if(constant('IS_WPMU'))
 {
 	if ( is_site_admin() )
 		add_submenu_page( 'wpmu-admin.php', 'WP-invites', 'WP-invites', 8, "manage_invites", "invites_admin" );
@@ -374,19 +378,23 @@ if(constant('IS_BUDDYPRESS'))
   #if blog is selected, it is neccessary...
 	add_filter('bp_core_account_activated', 'bp_invites_on_activate_user', 1, 2);
 }
-elseif(constant('IS_WPMU'))#for MU only
+
+if(constant('IS_WPMU') && !constant('IS_BUDDYPRESS'))#for MU only
 {
 
 	#set meta for wpmu
   add_filter('add_signup_meta','wpmu_invites_add_signup_meta',1,1);
 }
-else#for simple wordpress
+if(!constant('IS_WPMU'))#for simple wordpress
 {
 	add_action('register_form', 'invites_add_signup_fields');
 	add_filter( 'registration_errors', 'invites_validate_signup_fields',99,1);
 	add_action( 'user_register', 'wp_invites_on_activate_user');
 }
-add_action( 'admin_menu', 'invites_add_admin_menu');
+add_action( 'admin_menu', 'invites_add_admin_menu',20);
+// NOTE the addition of a higher priority seems to solve the problems where
+//  WPMU starts trying to tell you that you don't have access 
+
   #output in wp innerpanel
 add_action( 'show_user_profile', 'wp_output_invites',99,1);
 add_action( 'edit_user_profile', 'wp_output_invites',99,1);
