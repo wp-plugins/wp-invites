@@ -2,8 +2,8 @@
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
-Tested up to: 3.0.1
-Stable tag: 2.1
+Tested up to: 4.0
+Stable tag: 2.21
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
@@ -29,6 +29,8 @@ Wordpress, Wordpress MU and Buddypress compatible.
 
 2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.
 2.1 - Several fixes for simple wordpress.
+2.2 - Internal release
+2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.
 
 ####Localization
 
