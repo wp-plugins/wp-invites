@@ -3,18 +3,16 @@ Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 2.6
 Tested up to: 4.0
-Stable tag: 2.21
+Stable tag: 2.30
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
 
-####NEW!!!
-Now you can configure different plugin options - separators, number of chars to be used for code generation, code working time and much more! Also, now you can add codes manually and view added codes.
-
 ####Description
-Stop any strangers from entering your blog! Only the ones who received invitation code will be able to register.
-Wordpress, Wordpress MU and Buddypress compatible.
+Stop any strangers from entering your blog! Only the ones who received invitation code will be able to register. You can configure different plugin options - separators, number of chars to be used for code generation, code working time and much more! Also, now you can add codes manually and view added codes.
 
+####Compatibility
+This plugin is compatible with Wordpress 4. It was compatible with Wordpress MU and Buddypress some time ago but I don't think it is the case any more.
 
 ####History
 
@@ -31,6 +29,7 @@ Wordpress, Wordpress MU and Buddypress compatible.
 2.1 - Several fixes for simple wordpress.    
 2.2 - Internal release    
 2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
+2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
 
 ####Localization
 

@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP-invites
-Plugin URI: http://jehy.ru/wp-plugins.en.html
-Description: Invites system for wordpress, wordpress MU and buddypress!
+Author URI: http://jehy.ru/articles/
+Plugin URI: http://jehy.ru/articles/2009/02/09/wordpress-plugins/
+Description: Invites system for wordpress, wordpress MU and buddypress! To set up, visit <a href="options-general.php?page=wp-invites/wp-invites.php">configuration panel</a>.
 Author: Jehy
-Version: 2.21
-Author URI: http://jehy.ru/index.en.html
+Version: 2.30
 */
 if(!function_exists('str_split'))
 {
@@ -41,12 +41,18 @@ add_action('init', 'invites_init');
 
 function invites_ifreal($val)#check if it's a real invite code
 {global $wpdb;
-	$sql = 'SELECT 1 FROM '.INVITES_PREFIX.'invites WHERE `value`="'.addslashes(invites_unbeautify($val)).'" LIMIT 1';
-	$result=mysql_query($sql);
-	echo mysql_error();
-	if(mysql_num_rows($result))
-		return TRUE;
-	return FALSE;
+
+$meta_key = 'miles';
+$res = $wpdb->get_var( $wpdb->prepare( 
+	"SELECT 1 FROM ".INVITES_PREFIX."invites WHERE `value`= %s LIMIT 1",addslashes(invites_unbeautify($val))));
+if(is_null($res))
+{
+	echo $wpdb->last_error;
+   return FALSE;
+}
+if(!$res)
+   return FALSE;
+return TRUE;
 }
 
 function invites_unbeautify($str)
@@ -100,17 +106,16 @@ function invites_get_options()
       $wp_invites_options[$key] = $val;}
 
 function invites_admin( $message = '', $type = 'error' )
-{global $wp_invites_options;
-global $wpdb;
+{global $wp_invites_options,$wpdb;
 if ( ( $wpdb->get_var('show tables like "'.INVITES_PREFIX.'invites"') == null ))
 {
 	echo '<br>No MySQL table found. Installing...';
 	invites_install();
 }
-?><a href="?page=manage_invites&action=view">View created codes</a><br>
-<a href="?page=manage_invites&action=options">Configure plugin</a><br>
-<a href="?page=manage_invites">Generate new codes</a><br>
-<a href="?page=manage_invites&action=add">Add codes manually</a><br>
+?><a href="?page=wp-invites/wp-invites.php&action=view">View created codes</a><br>
+<a href="?page=wp-invites/wp-invites.php&action=options">Configure plugin</a><br>
+<a href="?page=wp-invites/wp-invites.php">Generate new codes</a><br>
+<a href="?page=wp-invites/wp-invites.php&action=add">Add codes manually</a><br>
 <?php
 ?><div align="center"><?php
 
@@ -151,21 +156,22 @@ elseif($_REQUEST['action']=='add')
   ?><form method="post" action="">Please add codes, one for each line. Default expiration date will be used for them. You can add them with or without separators.
   <br><textarea cols="60" rows="20" name="codes"></textarea>
   <input type="hidden" name="action" value="add">
-  <input type="hidden" name="page" value="manage_invites">
+  <input type="hidden" name="page" value="wp-invites/wp-invites.php">
   <input type="hidden" name="step" value="2"><br>
 	<input type="submit"  value="<?php _e('Add', 'wp-invites') ?>"></form>
   <?php}
 elseif($_REQUEST['action']=='view')
 {  $sql = 'SELECT value,`datetime`,(`datetime`+ INTERVAL '.$wp_invites_options['REMOVE_INTERVAL'].' DAY) as `remove` FROM '.INVITES_PREFIX.'invites order by `datetime`';
-	#echo $sql;
-	$result=mysql_query($sql);
-	echo mysql_error();
-	if(mysql_num_rows($result))
-	{	  ?>Generated codes:<table width="100%"><tr><td>Code</td><td>Generated on</td><td>Valid till</td></tr><?php
-	  while($row=mysql_fetch_array($result))
-	  {	    echo '<tr><td>'.invites_beautify($row['value']).'</td><td>'.$row['datetime'].'</td><td>'.$row['remove'].'</td></tr>';	  }
-	  ?></table><?php
-	}}
+  $res=$wpdb->get_results($sql,ARRAY_A);
+  if(is_null($res))
+  {
+	 echo $wpdb->last_error;
+  }
+  elseif(is_array($res))
+  {
+	  ?><h2>Generated codes:</h2><table width="100%"><tr><td>Code</td><td>Generated on</td><td>Valid till</td></tr><?php
+  foreach($res as $row)	    echo '<tr><td>'.invites_beautify($row['value']).'</td><td>'.$row['datetime'].'</td><td>'.$row['remove'].'</td></tr>';
+	  ?></table><?php	}}
 else
 {  if($_REQUEST['step']=='2')
   {
@@ -264,9 +270,10 @@ function wp_invites_on_activate_user( $user_id)
 {global $wpdb;
 
   $sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `value`="'.invites_unbeautify($_SESSION['invite_code']).'"';
-  $wpdb->query($sql);
-  echo mysql_error();
-	update_usermeta( $user_id, 'invite_code',$_SESSION['invite_code']);
+  $res=$wpdb->query($sql);
+  if($res===FALSE)
+    echo $wpdb->last_error;
+  update_usermeta( $user_id, 'invite_code',$_SESSION['invite_code']);
 }
 
 function bp_invites_on_activate_user($meta='',$key='')
@@ -280,15 +287,27 @@ global $wpdb, $bp;
 
 if(constant('IS_BUDDYPRESS'))
 {
-   add_submenu_page( 'bp-general-settings', 'WP-invites', 'WP-invites', 8, "manage_invites", "invites_admin" );
+   add_submenu_page( 'bp-general-settings', 'WP-invites', 'WP-invites', 8, "wp-invites", "invites_admin" );
 }
 else if(constant('IS_WPMU'))
 {
 	if ( is_site_admin() )
-		add_submenu_page( 'wpmu-admin.php', 'WP-invites', 'WP-invites', 8, "manage_invites", "invites_admin" );
+		add_submenu_page( 'wpmu-admin.php', 'WP-invites', 'WP-invites', 8, "wp-invites", "invites_admin" );
 }
 else
-	add_submenu_page('plugins.php','WP-invites','WP-invites',8,"manage_invites",'invites_admin');
+	//add_submenu_page('plugins.php','WP-invites','WP-invites',8,"wp-invites",'invites_admin');
+   
+  //add_action('admin_menu', 'invites_modify_menu');
+  {
+  
+	add_options_page(
+		'WP-invites',
+		'WP-invites',
+		'manage_options',
+		__FILE__,
+		'invites_admin'
+		);
+  }
 }
 
 
@@ -342,8 +361,9 @@ function wpmu_invites_add_signup_meta($meta) {
 global $wpdb;
 
 $sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `value`="'.invites_unbeautify($_SESSION['invite_code']).'"';
-$wpdb->query($sql);
-echo mysql_error();
+$res=$wpdb->query($sql);
+if($res===FALSE)
+  echo $wpdb->last_error;
 
 $add_meta = array('invite_code' => invites_unbeautify($_SESSION['invite_code']));
 $meta = array_merge($add_meta, $meta);
