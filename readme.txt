@@ -27,10 +27,10 @@ Wordpress, Wordpress MU and Buddypress compatible.
 1.2 - Crytical upgrade for WP MU (not for simple wordpress), install as soon as possible.    
 1.3 - Fixed registration incompatibility issues.    
 
-2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.
-2.1 - Several fixes for simple wordpress.
-2.2 - Internal release
-2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.
+2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.    
+2.1 - Several fixes for simple wordpress.    
+2.2 - Internal release    
+2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
 
 ####Localization
 
