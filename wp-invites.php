@@ -284,22 +284,18 @@ function bp_invites_on_activate_user($meta='',$key='')
 function invites_add_admin_menu()
 {
 global $wpdb, $bp;
-
-if(constant('IS_BUDDYPRESS'))
+/*if(constant('IS_BUDDYPRESS'))
 {
    add_submenu_page( 'bp-general-settings', 'WP-invites', 'WP-invites', 8, "wp-invites", "invites_admin" );
-}
-else if(constant('IS_WPMU'))
+}*/
+if(constant('IS_WPMU'))
 {
 	if ( is_site_admin() )
 		add_submenu_page( 'wpmu-admin.php', 'WP-invites', 'WP-invites', 8, "wp-invites", "invites_admin" );
 }
-else
+else #same for buddypress and simple wordpress
 	//add_submenu_page('plugins.php','WP-invites','WP-invites',8,"wp-invites",'invites_admin');
-   
-  //add_action('admin_menu', 'invites_modify_menu');
-  {
-  
+  {  
 	add_options_page(
 		'WP-invites',
 		'WP-invites',
