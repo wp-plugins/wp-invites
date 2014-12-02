@@ -5,7 +5,7 @@ Author URI: http://jehy.ru/articles/
 Plugin URI: http://jehy.ru/articles/2009/02/09/wordpress-plugins/
 Description: Invites system for wordpress, wordpress MU and buddypress! To set up, visit <a href="options-general.php?page=wp-invites/wp-invites.php">configuration panel</a>.
 Author: Jehy
-Version: 2.40
+Version: 2.41
 */
 if(!function_exists('str_split'))
 {
@@ -299,11 +299,11 @@ function bp_invites_on_activate_user($meta='',$key='')
 
 function invites_add_admin_menu()
 {
-global $wpdb, $bp;
-/*if(constant('IS_BUDDYPRESS'))
+/*global $wpdb, $bp;
+if(constant('IS_BUDDYPRESS'))
 {
    add_submenu_page( 'bp-general-settings', 'WP-invites', 'WP-invites', 8, "wp-invites", "invites_admin" );
-}*/
+}
 if(constant('IS_WPMU'))
 {
 	if ( is_site_admin() )
@@ -311,7 +311,7 @@ if(constant('IS_WPMU'))
 }
 else #same for buddypress and simple wordpress
 	//add_submenu_page('plugins.php','WP-invites','WP-invites',8,"wp-invites",'invites_admin');
-  {  
+  {  */
 	add_options_page(
 		'WP-invites',
 		'WP-invites',
@@ -319,7 +319,7 @@ else #same for buddypress and simple wordpress
 		__FILE__,
 		'invites_admin'
 		);
-  }
+  //}
 }
 
 
