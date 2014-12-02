@@ -74,8 +74,6 @@ For old versions of Wordpress MU and Buddypress:
 
 Still none.
 == Screenshots ==
-1. Get activation code in Wordpress Mu.
-2. Get activation code in simple Wordpress 2.7.
-3. Invitation code request while registering in Wordpress.
-4. Invitation code is displayed for administrator in user profile.
-4. Invitation code is also displayed for administrator in user profile in Buddypress.
+1. Invitation code request while registering in Wordpress.
+2. Invitation code is displayed for administrator in user profile.
+3. Invitation code is also displayed for administrator in user profile in Buddypress.
