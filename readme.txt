@@ -1,9 +1,9 @@
 === WP-Invites ===
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
-Requires at least: 2.6
-Tested up to: 4.0
-Stable tag: 2.30
+Requires at least: 4.0
+Tested up to: 4.1
+Stable tag: 2.40
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
@@ -30,13 +30,12 @@ This plugin is compatible with Wordpress 4. It was compatible with Wordpress MU 
 2.2 - Internal release    
 2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
 2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
+2.40 - Many changes for admin area, added cool styling, improved some SQL queries. Also fixed localization issues.    
 
 ####Localization
 
 * English
-* Russian - by [Slaffik](http://cosydale.com/)
-* Belarusian - by [Marcis Gasuns](http://www.ippavloff.ru/)    
-In 2.0 version, localization is messed a bit - I didn't have time to update it. If you need wp-invites in your language - just ask, and I'll make neccessary update.
+* Russian
 
 ####Attention!
 This plugin only denies new registrations from strangers. If you need to make your blog really private, you should restrict viewing [with Registered-Users-Only-2 plugin](http://wordpress.org/extend/plugins/registered-users-only-2/) or somewhat alike.

@@ -5,7 +5,7 @@ Author URI: http://jehy.ru/articles/
 Plugin URI: http://jehy.ru/articles/2009/02/09/wordpress-plugins/
 Description: Invites system for wordpress, wordpress MU and buddypress! To set up, visit <a href="options-general.php?page=wp-invites/wp-invites.php">configuration panel</a>.
 Author: Jehy
-Version: 2.30
+Version: 2.40
 */
 if(!function_exists('str_split'))
 {
@@ -16,7 +16,13 @@ function str_split($str, $l=1) {
 }
 
 
-if (function_exists('is_site_admin'))
+function init_lang()
+{
+  $plugin_dir = basename(dirname(__FILE__));
+  load_plugin_textdomain( 'wp-invites', false, $plugin_dir.'/lang');
+}
+
+if (is_multisite())
 	DEFINE('IS_WPMU',1);
 else
 	DEFINE('IS_WPMU',0);
@@ -34,6 +40,7 @@ else
 function invites_init()
 {
 	@session_start();
+  init_lang();
 	invites_get_options();
 }
 
@@ -69,8 +76,8 @@ function invites_beautify($str)
 
 function invites_add($val)#add invite... ))
 {global $wpdb;
-	$sql = 'INSERT INTO '.INVITES_PREFIX.'invites (`value`,`datetime`) VALUES("'.invites_unbeautify($val).'",NOW())';
-	$wpdb->query($sql);
+	$sql = 'INSERT INTO '.INVITES_PREFIX.'invites (`value`,`datetime`) VALUES(%s,NOW())';
+	$wpdb->query($wpdb->prepare($sql,invites_unbeautify($val)));
 }
 
 function invites_make()#make new code
@@ -105,19 +112,25 @@ function invites_get_options()
     foreach($options as $key => $val)
       $wp_invites_options[$key] = $val;}
 
+function invites_menu()
+{
+echo'
+<ul style="font-size:14px;"><li><a href="?page=wp-invites/wp-invites.php&action=view">'.__('View created codes','wp-invites').'</a></li>
+<li><a href="?page=wp-invites/wp-invites.php&action=options">'.__('Configure plugin','wp-invites').'</a></li>
+<li><a href="?page=wp-invites/wp-invites.php">'.__('Generate new codes','wp-invites').'</a></li>
+<li><a href="?page=wp-invites/wp-invites.php&action=add">'.__('Add codes manually','wp-invites').'</a></li></ul>
+';
+}
+
 function invites_admin( $message = '', $type = 'error' )
 {global $wp_invites_options,$wpdb;
 if ( ( $wpdb->get_var('show tables like "'.INVITES_PREFIX.'invites"') == null ))
 {
-	echo '<br>No MySQL table found. Installing...';
+	echo '<br>'.__('No MySQL table found. Installing...','wp-invites');
 	invites_install();
 }
-?><a href="?page=wp-invites/wp-invites.php&action=view">View created codes</a><br>
-<a href="?page=wp-invites/wp-invites.php&action=options">Configure plugin</a><br>
-<a href="?page=wp-invites/wp-invites.php">Generate new codes</a><br>
-<a href="?page=wp-invites/wp-invites.php&action=add">Add codes manually</a><br>
-<?php
-?><div align="center"><?php
+invites_menu();
+?><?php
 
 if($_REQUEST['action']=='options')
 {  if($_REQUEST['step']=='2')
@@ -126,39 +139,41 @@ if($_REQUEST['action']=='options')
       update_site_option('wp-invites', $_REQUEST['wp_invites']);
     else
       update_option('wp-invites', $_REQUEST['wp_invites']);
-      ?>Options updated!<?php  }
+      echo '<div class="updated">'.__('Options updated!','wp-invites').'</div>';  }
   invites_get_options();
-  ?><div class="form-table" style="width:70%; border:1px solid #666; padding:10px; background-color:#CECECE;margin:10px;";><p style="text-align:left;">
-	<form method="post" action="">
+  ?>
+  <h2><?php _e('WP-Invites options','wp-invites');?></h2>
+  <form method="post" action="">
 	<table>
-	<tr><td>Code length</td><td><input name="wp_invites[INVITE_LENGTH]" value="<?php echo $wp_invites_options['INVITE_LENGTH'];?>"></td></tr>
-	<tr><td>visual split of characters</td><td><input name="wp_invites[INVITE_SPLIT]" value="<?php echo $wp_invites_options['INVITE_SPLIT'];?>"></td></tr>
-	<tr><td>chars, used for code generation</td><td><input name="wp_invites[CHARS]" value="<?php echo $wp_invites_options['CHARS'];?>"></td></tr>
-	<tr><td>remove interval, in days. Set to 3650 (10 years), if you need infinite :)</td><td><input name="wp_invites[REMOVE_INTERVAL]" value="<?php echo $wp_invites_options['REMOVE_INTERVAL'];?>"></td></tr>
-	<tr><td>Separator for output</td><td><input name="wp_invites[SEPARATOR]" value="<?php echo $wp_invites_options['SEPARATOR'];?>"></td></tr>
+	<tr><td><?php _e('Code length','wp-invites');?></td><td><input name="wp_invites[INVITE_LENGTH]" value="<?php echo $wp_invites_options['INVITE_LENGTH'];?>"></td></tr>
+	<tr><td><?php _e('visual split of characters','wp-invites');?></td><td><input name="wp_invites[INVITE_SPLIT]" value="<?php echo $wp_invites_options['INVITE_SPLIT'];?>"></td></tr>
+	<tr><td><?php _e('chars, used for code generation','wp-invites');?></td><td><input name="wp_invites[CHARS]" value="<?php echo $wp_invites_options['CHARS'];?>"></td></tr>
+	<tr><td><?php _e('remove interval, in days. Set to 3650 (10 years), if you need infinite','wp-invites');?> :)</td><td><input name="wp_invites[REMOVE_INTERVAL]" value="<?php echo $wp_invites_options['REMOVE_INTERVAL'];?>"></td></tr>
+	<tr><td><?php _e('Separator for output','wp-invites');?></td><td><input name="wp_invites[SEPARATOR]" value="<?php echo $wp_invites_options['SEPARATOR'];?>"></td></tr>
 	</table>
 	<input type="hidden" name="action" value="options">
 	<input type="hidden" name="step" value="2">
-	<input type="submit" value="<?php _e('Save', 'wp-invites') ?>"></form></div>
-</div><?php
+	<input type="submit" value="<?php _e('Save', 'wp-invites') ?>" class="button button-primary"></form>
+<?php
 }
 elseif($_REQUEST['action']=='add')
 {  if($_REQUEST['step']=='2')
   {    $codes=explode("\n",$_REQUEST['codes']);
+    echo '<div class="updated">';
     for($i=0;$i<sizeof($codes);$i++)
     {      $invite=trim($codes[$i]);
       $invite=invites_unbeautify($invite);
       if($invite)
       {
 		    invites_add($invite);
-		    echo '<br>Code added: '.invites_beautify($invite);
-		  }    }  }
-  ?><form method="post" action="">Please add codes, one for each line. Default expiration date will be used for them. You can add them with or without separators.
-  <br><textarea cols="60" rows="20" name="codes"></textarea>
+		    echo '<br>'.__('Code added:','wp-invites').' '.invites_beautify($invite);
+		  }    }    echo '</div>';  }
+  ?><form method="post" action=""><?php _e('Please add codes, one for each line. Default expiration date will be used for them. You can add them with or without separators.', 'wp-invites') ?><br>
+  <br><textarea rows="20" name="codes"  class="large-text code" style="width:300px;"></textarea>
   <input type="hidden" name="action" value="add">
   <input type="hidden" name="page" value="wp-invites/wp-invites.php">
-  <input type="hidden" name="step" value="2"><br>
-	<input type="submit"  value="<?php _e('Add', 'wp-invites') ?>"></form>
+  <input type="hidden" name="step" value="2">
+	<input type="submit"  value="<?php _e('Add', 'wp-invites') ?>" class="button button-primary" style="width:80px;"></form>
   <?php}
 elseif($_REQUEST['action']=='view')
 {  $sql = 'SELECT value,`datetime`,(`datetime`+ INTERVAL '.$wp_invites_options['REMOVE_INTERVAL'].' DAY) as `remove` FROM '.INVITES_PREFIX.'invites order by `datetime`';
@@ -169,27 +184,28 @@ elseif($_REQUEST['action']=='view')
   }
   elseif(is_array($res))
   {
-	  ?><h2>Generated codes:</h2><table width="100%"><tr><td>Code</td><td>Generated on</td><td>Valid till</td></tr><?php
+	  echo '<h2>'.__('Generated codes:', 'wp-invites').'</h2><table width="100%"><tr><td>'.__('Code', 'wp-invites').'</td><td>'.__('Generated on', 'wp-invites').'</td><td>'.__('Valid till', 'wp-invites').'</td></tr>';
   foreach($res as $row)	    echo '<tr><td>'.invites_beautify($row['value']).'</td><td>'.$row['datetime'].'</td><td>'.$row['remove'].'</td></tr>';
 	  ?></table><?php	}}
 else
 {  if($_REQUEST['step']=='2')
   {
-    ?><div class="form-table" style="width:70%; border:1px solid #666; padding:10px; background-color:#CECECE;margin:10px;";><H2><?php _e('Generated invitation codes:', 'wp-invites') ?></h2><p style="text-align:left;"><?php
+    ?><div class="updated"><H2><?php _e('Generated invitation codes:', 'wp-invites') ?></h2><p><?php
 	  for($i=0;$i<$_REQUEST['invites_num'];$i++)
 	  {
 		  $invite=invites_make();
 		  invites_add($invite);
 		  echo '<br>'.invites_beautify($invite);
-	  }?></div><?php
+	  }?></p></div><?php
 	}
-?><div class="form-table" style="width:70%; border:1px solid #666; padding:10px; background-color:#CECECE;margin:10px;";><p style="text-align:left;"><?php _e('Please, choose, how many invitation codes you are going to generate. Later, codes will be either assigned to registered users, or disapperar after a period of time. Code has a length of', 'wp-invites') ?> <?php echo $wp_invites_options['INVITE_LENGTH'] ?> <?php _e(' chars, and is combined from', 'wp-invites') ?> <?php echo strlen($wp_invites_options['CHARS']) ?> <?php _e(' different chars, and, if not activated, is being removed after', 'wp-invites') ?> <?php echo $wp_invites_options['REMOVE_INTERVAL'];?> <?php _e(' days.', 'wp-invites') ?></p>
+?><h2><?php _e('Generate codes','wp-invites');?></h2><p><?php _e('Please, choose, how many invitation codes you are going to generate. Later, codes will be either assigned to registered users, or disapperar after a period of time. Code has a length of', 'wp-invites') ?> <?php echo $wp_invites_options['INVITE_LENGTH'] ?> <?php _e(' chars, and is combined from', 'wp-invites') ?> <?php echo strlen($wp_invites_options['CHARS']) ?> <?php _e(' different chars, and, if not activated, is being removed after', 'wp-invites') ?> <?php echo $wp_invites_options['REMOVE_INTERVAL'];?> <?php _e(' days.', 'wp-invites') ?></p>
+  <p><?php _e('You can always change code generation parameters on options page.', 'wp-invites') ?></p>
 	<form method="post" action="">
-	<input type="text" name="invites_num" value="50">
+	<input type="text" name="invites_num" value="50" class="regular-text ltr" style="width:50px;">
 	<input type="hidden" name="action" value="generate">
 	<input type="hidden" name="step" value="2">
-	<input type="submit"  value="<?php _e('Generate', 'wp-invites') ?>"></form></div>
-</div><?php
+	<input type="submit"  value="<?php _e('Generate', 'wp-invites') ?>" class="button button-primary"></form></div>
+<?php
 }
 }
 
@@ -212,9 +228,9 @@ function invites_install() {
 		$result=$wpdb->query($sql);
 		if($result===FALSE)
 		{
-			echo '<p class="error">WP invites table could not be installed! Please check database permissions. <br><b>Query:</b><br> '.$sql.'<br><b>Error:</b>';
+			echo '<div class="error">'.__('WP invites table could not be installed! Please check database permissions.', 'wp-invites').' <br><b>'.__('Query:', 'wp-invites').'</b><br> '.$sql.'<br><b>'.__('Error:', 'wp-invites').'</b>';
 			$wpdb->print_error();
-			echo '</p>';
+			echo '</div>';
 		}
 	}
 }
@@ -236,7 +252,7 @@ function invites_add_signup_fields($errors_mu) {
   <p>
 		<label for="wp-invites"><?php _e('Invite code', 'wp-invites') ?></label><br />
 		<?php _e('Please, input here invitation code, received from the blog owner', 'wp-invites') ?><br>
-		<input type="text" name="invite_code" value="<?php echo $_REQUEST['invite_code'];?>" style="width:200px">
+		<input type="text" name="invite_code" value="<?php echo $_REQUEST['invite_code'];?>" class="regular-text ltr">
 	</p>
 	<?php
 }
@@ -250,11 +266,11 @@ function invites_validate_signup_fields( $result )
 
   if(!invites_ifreal(invites_unbeautify($_SESSION['invite_code'])))
   {    if(IS_BUDDYPRESS)
-      $bp->signup->errors['wp_invites_error']=__('<b>Error:</b>Wrong invite code', 'wp-invites');
+      $bp->signup->errors['wp_invites_error']='<b>'.__('Error:', 'wp-invites').'</b>'.__('Wrong invite code', 'wp-invites');
     elseif(IS_WPMU)
-	    $result['errors']->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );
+	    $result['errors']->add('wp_invites_error', '<b>'.__('Error:', 'wp-invites').'</b>'.__('Wrong invite code', 'wp-invites') );
 	  else
-	    $result->add('wp_invites_error', __('<b>Error:</b>Wrong invite code', 'wp-invites') );
+	    $result->add('wp_invites_error', '<b>'.__('Error:', 'wp-invites').'</b>'.__('Wrong invite code', 'wp-invites') );
   }
 	return $result;
 }
@@ -324,7 +340,7 @@ if(
 <tr>
 	<th>
 <label for="invite code"><?php _e('Invite code', 'wp-invites') ?></label></th>
-	<td><input type="text"  disabled="disabled" class="regular-text" value="<?=$code;?>"></td></tr></table><?php
+	<td><input type="text"  disabled="disabled" class="regular-text ltr" value="<?php echo $code;?>"></td></tr></table><?php
 }
 }
 
@@ -356,8 +372,8 @@ if (bp_is_home()||is_site_admin())
 function wpmu_invites_add_signup_meta($meta) {
 global $wpdb;
 
-$sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `value`="'.invites_unbeautify($_SESSION['invite_code']).'"';
-$res=$wpdb->query($sql);
+$sql = 'DELETE FROM '.INVITES_PREFIX.'invites WHERE `value`=%s';
+$res=$wpdb->query($wpdb->prepare($sql,invites_unbeautify($_SESSION['invite_code'])));
 if($res===FALSE)
   echo $wpdb->last_error;
 
