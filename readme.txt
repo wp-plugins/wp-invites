@@ -30,7 +30,7 @@ This plugin is compatible with Wordpress 4. It was compatible with Wordpress MU 
 2.2 - Internal release    
 2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
 2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
-2.40 - Many changes for admin area, added cool styling, improved some SQL queries.    
+2.40 - Many changes for admin area, added cool styling, improved some SQL queries. Also fixed localization issues.    
 
 ####Localization
 
@@ -74,8 +74,6 @@ For old versions of Wordpress MU and Buddypress:
 
 Still none.
 == Screenshots ==
-1. Get activation code in Wordpress Mu.
-2. Get activation code in simple Wordpress 2.7.
-3. Invitation code request while registering in Wordpress.
-4. Invitation code is displayed for administrator in user profile.
-4. Invitation code is also displayed for administrator in user profile in Buddypress.
+1. Invitation code request while registering in Wordpress.
+2. Invitation code is displayed for administrator in user profile.
+3. Invitation code is also displayed for administrator in user profile in Buddypress.
