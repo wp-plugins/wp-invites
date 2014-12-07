@@ -5,7 +5,7 @@ Author URI: http://jehy.ru/articles/
 Plugin URI: http://jehy.ru/articles/2009/02/09/wordpress-plugins/
 Description: Invites system for wordpress, wordpress MU and buddypress! To set up, visit <a href="options-general.php?page=wp-invites/wp-invites.php">configuration panel</a>.
 Author: Jehy
-Version: 2.41
+Version: 2.42
 */
 if(!function_exists('str_split'))
 {
@@ -389,18 +389,19 @@ if(constant('IS_WPMU'))
 {
   #for WPMU and buddypress
 
-  #validate signup for wpmu and buddy
+  #validate signup for wpmu 
 	add_filter( 'wpmu_validate_user_signup', 'invites_validate_signup_fields',99,1);
 
-	#activate - add meta for wpmu and buddy
+	#activate - add meta for wpmu
 	add_filter('wpmu_activate_user', 'invites_on_activate_user', 1, 3);
   
-  #add refistration field in wpmu and for byddypress wpmu themes
+  #add registration field in wpmu
 	add_action( 'signup_extra_fields', 'invites_add_signup_fields');
 }
 if(constant('IS_BUDDYPRESS'))
-{  #add registration field in buddy
-	add_action('bp_before_account_details_fields','invites_add_signup_fields',99);
+{  #validate fields   add_action('bp_signup_validate', 'invites_validate_signup_fields',99,1);  
+  #add registration field in buddy
+  add_action('bp_before_account_details_fields','invites_add_signup_fields',99);
   #output code in buddy profile
   add_action('bp_after_profile_header_content','bp_output_invites',99);
 
