@@ -27,9 +27,14 @@ This plugin only denies new registrations from strangers. If you need to make yo
 ####Questions
 If you have troubles with my plugin, need more details, or have suggestions - please visit [my blog](http://jehy.ru/articles/2009/02/09/wordpress-plugins/#comments) for more info.
 
+
 ####Please!
 If you don't rate my plugin as 5/5 - please write why - and I will change plugin, add options and fix bugs. It's very unpleasant to see silient low rates.  
 If you don't understand what plugin does - also don't rate it ;)
+
+####Donate or help?
+If you want to ensure the future development and support of this plugin, you can make donation [on this page](http://jehy.ru/articles/donate/) or just write about this plugin in your blog.
+
 
 ###Installation
 Please look instructions on the [installation page ^_^](http://wordpress.org/extend/plugins/wp-invites/installation/).
