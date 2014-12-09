@@ -12,9 +12,9 @@ Invites system for wordpress, wordpress MU and buddypress!
 Stop any strangers from entering your blog! Only the ones who received invitation code will be able to register. You can configure different plugin options - separators, number of chars to be used for code generation, code working time and much more! Also, now you can add codes manually and view added codes.
 
 ####Compatibility
-This plugin is compatible with Wordpress 4. It was compatible with Wordpress MU and Buddypress some time ago but I don't think it is the case any more.
+This plugin is compatible with Wordpress 4, should be compatible with buddypress and may be compatible with wordpress MU. If you find any compatibility issues for current versions - feedback appreciated.
 
-[https://wordpress.org/plugins/wp-invites/changelog/](Changelog).
+[Changelog](https://wordpress.org/plugins/wp-invites/changelog/).
 
 ####Localization
 
