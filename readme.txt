@@ -14,24 +14,7 @@ Stop any strangers from entering your blog! Only the ones who received invitatio
 ####Compatibility
 This plugin is compatible with Wordpress 4. It was compatible with Wordpress MU and Buddypress some time ago but I don't think it is the case any more.
 
-####History
-
-0.1 - First release  
-0.2 - Activation and language issues with wordpress MU fixed  
-0.3 - Updated to work with the latest BuddyPress system   
-0.4 - Defined str_split function for compatibility with PHP4   
-1.0 - Many different fixes, including usernames's replacing and error reporting   
-1.1 - Fixed broken compatibility mode for MySQL 4, added some error reporting    
-1.2 - Crytical upgrade for WP MU (not for simple wordpress), install as soon as possible.    
-1.3 - Fixed registration incompatibility issues.    
-
-2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.    
-2.1 - Several fixes for simple wordpress.    
-2.2 - Internal release    
-2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
-2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
-2.40 - Many changes for admin area, added cool styling, improved some SQL queries. Also fixed localization issues.    
-2.41 - Fix for buddypress.    
+[https://wordpress.org/plugins/wp-invites/changelog/](Changelog).
 
 ####Localization
 
@@ -51,11 +34,25 @@ If you don't understand what plugin does - also don't rate it ;)
 ###Installation
 Please look instructions on the [installation page ^_^](http://wordpress.org/extend/plugins/wp-invites/installation/).
 
-####Donate?
-If you want to ensure the future development and support of this plugin, you can make donation [on this page](http://jehy.ru/donate.en.html).
+== Changelog ==
 
-####Thanks
-Thanks to Floris from [Members of Staff](http://membersofstaff.org) for improvement suggentions and a huge donation ^_^
+0.1 - First release  
+0.2 - Activation and language issues with wordpress MU fixed  
+0.3 - Updated to work with the latest BuddyPress system   
+0.4 - Defined str_split function for compatibility with PHP4   
+1.0 - Many different fixes, including usernames's replacing and error reporting   
+1.1 - Fixed broken compatibility mode for MySQL 4, added some error reporting    
+1.2 - Crytical upgrade for WP MU (not for simple wordpress), install as soon as possible.    
+1.3 - Fixed registration incompatibility issues.    
+
+2.0 - Absolutely new version, with many functions, compatible with newest wordpress, wordpress mu and buddypress.    
+2.1 - Several fixes for simple wordpress.    
+2.2 - Internal release    
+2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
+2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
+2.40 - Many changes for admin area, added cool styling, improved some SQL queries. Also fixed localization issues.    
+2.41,2.42 - Fix for buddypress. 
+
 
 == Installation ==
 Usually:  
@@ -74,6 +71,7 @@ For old versions of Wordpress MU and Buddypress:
 == Frequently Asked Questions ==
 
 Still none.
+
 == Screenshots ==
 1. Invitation code request while registering in Wordpress.
 2. Invitation code is displayed for administrator in user profile.
