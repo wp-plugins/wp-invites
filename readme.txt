@@ -2,8 +2,8 @@
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 4.0
-Tested up to: 4.1
-Stable tag: 2.42
+Tested up to: 4.1.1
+Stable tag: 2.50
 Invites system for wordpress, wordpress MU and buddypress!
 
 == Description ==
@@ -56,7 +56,8 @@ Please look instructions on the [installation page ^_^](http://wordpress.org/ext
 2.21 - Fix for simple wordpress & Buddypress combo errors. Hope it works.    
 2.30 - Fixed for wordpress 4.1, direct SQL replaced with $wpdb queries, added missing menu button.    
 2.40 - Many changes for admin area, added cool styling, improved some SQL queries. Also fixed localization issues.    
-2.41,2.42 - Fix for buddypress. 
+2.41,2.42 - Fix for buddypress.
+2.50 - Code rewrite in Object oriented style, debug mode implemented, fixed error with user activation.
 
 
 == Installation ==
