@@ -210,7 +210,8 @@ class wp_invites
 <ul style="font-size:14px;"><li><a href="?page=wp-invites/wp-invites.php&action=view">' . __('View created codes', 'wp-invites') . '</a></li>
 <li><a href="?page=wp-invites/wp-invites.php&action=options">' . __('Configure plugin', 'wp-invites') . '</a></li>
 <li><a href="?page=wp-invites/wp-invites.php">' . __('Generate new codes', 'wp-invites') . '</a></li>
-<li><a href="?page=wp-invites/wp-invites.php&action=add">' . __('Add codes manually', 'wp-invites') . '</a></li></ul>
+<li><a href="?page=wp-invites/wp-invites.php&action=add">' . __('Add codes manually', 'wp-invites') . '</a></li>
+<li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EE8RM4N7BSNZ6">' . __('Donate', 'wp-invites') . '</a></li></ul>
 ';
     }
 
