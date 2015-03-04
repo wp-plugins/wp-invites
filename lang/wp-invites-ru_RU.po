@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: wp-invites\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-03 23:00+0300\n"
+"POT-Creation-Date: 2015-03-04 12:57+0300\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Jehy <fate@jehy.ru>\n"
 "Language-Team: Jehy <fate@jehy.ru>\n"
@@ -14,75 +14,79 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-KeywordsList: __ngettext_noop:1,2;__ngettext:1,2;__;_e;_c;"
 "_n_noop:1,2\n"
-"X-Generator: Poedit 1.5.3\n"
+"X-Generator: Poedit 1.7.4\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-#: ../wp-invites.php:205
+#: ../wp-invites.php:210
 msgid "View created codes"
 msgstr "Посмотреть созданные инвайты"
 
-#: ../wp-invites.php:206
+#: ../wp-invites.php:211
 msgid "Configure plugin"
 msgstr "Настройки плагина"
 
-#: ../wp-invites.php:207
+#: ../wp-invites.php:212
 msgid "Generate new codes"
 msgstr "Сгенерировать новые инвайты"
 
-#: ../wp-invites.php:208
+#: ../wp-invites.php:213
 msgid "Add codes manually"
 msgstr "Добавить инвайты вручную"
 
-#: ../wp-invites.php:216
+#: ../wp-invites.php:214
+msgid "Donate"
+msgstr "Пожертвовать"
+
+#: ../wp-invites.php:222
 msgid "No MySQL table found. Installing..."
 msgstr "MySQL таблица не найдена. Устанавливаю..."
 
-#: ../wp-invites.php:228
+#: ../wp-invites.php:232
 msgid "Options updated!"
 msgstr "Настройки обновлены!"
 
-#: ../wp-invites.php:232
+#: ../wp-invites.php:236
 msgid "WP-Invites options"
 msgstr "Настройки WP-Invites"
 
-#: ../wp-invites.php:236
+#: ../wp-invites.php:240
 msgid "Code length"
 msgstr "Длина инвайта"
 
-#: ../wp-invites.php:241
+#: ../wp-invites.php:245
 msgid "visual split of characters"
 msgstr "Делить при выводе на группы символов по"
 
-#: ../wp-invites.php:246
+#: ../wp-invites.php:250
 msgid "chars, used for code generation"
 msgstr "Символы, используемые для генерации кода"
 
-#: ../wp-invites.php:251
+#: ../wp-invites.php:255
 msgid "remove interval, in days. Set to 3650 (10 years), if you need infinite"
 msgstr ""
 "Время жизни инвайта, в днях. Если нужен вечный, поставьте 3650 (10 лет)"
 
-#: ../wp-invites.php:258
+#: ../wp-invites.php:262
 msgid "Separator for output"
 msgstr "Разделитель для форматирования"
 
-#: ../wp-invites.php:263
+#: ../wp-invites.php:267
 msgid "Enable debug output"
 msgstr "Включить режим отладки"
 
-#: ../wp-invites.php:264
+#: ../wp-invites.php:268
 msgid "Debug log will apear in html comments in the bottom of the page code"
 msgstr "Лог отладки появится в HTML комментариях внизу кода страницы"
 
-#: ../wp-invites.php:271
+#: ../wp-invites.php:275
 msgid "Save"
 msgstr "Сохранить"
 
-#: ../wp-invites.php:283
+#: ../wp-invites.php:287
 msgid "Code added:"
 msgstr "Инвайт добавлен:"
 
-#: ../wp-invites.php:290
+#: ../wp-invites.php:294
 msgid ""
 "Please add codes, one for each line. Default expiration date will be used "
 "for them. You can add them with or without separators."
@@ -90,35 +94,35 @@ msgstr ""
 "Пожалуйста, введите инвайты, по одному на строку. Для них будет использована "
 "указанная дата жизни. Вы можете добавлять их с разделителями или без."
 
-#: ../wp-invites.php:296
+#: ../wp-invites.php:300
 msgid "Add"
 msgstr "Добавить"
 
-#: ../wp-invites.php:306
+#: ../wp-invites.php:310
 msgid "Generated codes:"
 msgstr "Сгенерированные инвайты:"
 
-#: ../wp-invites.php:306 ../wp-invites.php:498
+#: ../wp-invites.php:310 ../wp-invites.php:504
 msgid "Code"
 msgstr "Инвайт"
 
-#: ../wp-invites.php:307
+#: ../wp-invites.php:311
 msgid "Generated on"
 msgstr "Сегерирован"
 
-#: ../wp-invites.php:307
+#: ../wp-invites.php:311
 msgid "Valid till"
 msgstr "Работает до"
 
-#: ../wp-invites.php:315
+#: ../wp-invites.php:319
 msgid "Generated invitation codes:"
 msgstr "Сгенерированные инвайты:"
 
-#: ../wp-invites.php:324
+#: ../wp-invites.php:328
 msgid "Generate codes"
 msgstr "Генерировать инвайты"
 
-#: ../wp-invites.php:325
+#: ../wp-invites.php:329
 msgid ""
 "Please, choose, how many invitation codes you are going to generate. Later, "
 "codes will be either assigned to registered users, or disappear after a "
@@ -128,59 +132,59 @@ msgstr ""
 "инвайты или будут присваоены использовавшим им пользователям, или пропадут "
 "по истечению срока жизни. Инвайт будет длиной в"
 
-#: ../wp-invites.php:326
+#: ../wp-invites.php:330
 msgid " chars, and is combined from"
 msgstr "символов и состоит из"
 
-#: ../wp-invites.php:327
+#: ../wp-invites.php:331
 msgid " different chars, and, if not activated, is being removed after"
 msgstr "разных символов, и, не будучи активированным, будет удалён через"
 
-#: ../wp-invites.php:328
+#: ../wp-invites.php:332
 msgid " days."
 msgstr "дней."
 
-#: ../wp-invites.php:329
+#: ../wp-invites.php:333
 msgid "You can always change code generation parameters on options page."
 msgstr ""
 "Вы всегда можете поменять параметры генерации инвайтов на странице настроек."
 
-#: ../wp-invites.php:334
+#: ../wp-invites.php:338
 msgid "Generate"
 msgstr "Генерировать"
 
-#: ../wp-invites.php:359
+#: ../wp-invites.php:363
 msgid ""
 "WP invites table could not be installed! Please check database permissions."
 msgstr ""
 "Таблица плагина WP-Invites не может быть установлена! Пожалуйста, проверьте "
 "разрешения базы данных."
 
-#: ../wp-invites.php:360
+#: ../wp-invites.php:364
 msgid "Query:"
 msgstr "Запрос:"
 
-#: ../wp-invites.php:360 ../wp-invites.php:404 ../wp-invites.php:406
-#: ../wp-invites.php:408
+#: ../wp-invites.php:364 ../wp-invites.php:410 ../wp-invites.php:412
+#: ../wp-invites.php:414
 msgid "Error:"
 msgstr "Ошибка:"
 
-#: ../wp-invites.php:385 ../wp-invites.php:477
+#: ../wp-invites.php:391 ../wp-invites.php:483
 msgid "Invite code"
 msgstr "Код инвайта"
 
-#: ../wp-invites.php:386
+#: ../wp-invites.php:392
 msgid "Please, input here invitation code, received from the blog owner"
 msgstr "Пожалуйста, введите код инвайта, полученный от владельца блога"
 
-#: ../wp-invites.php:404 ../wp-invites.php:406 ../wp-invites.php:408
+#: ../wp-invites.php:410 ../wp-invites.php:412 ../wp-invites.php:414
 msgid "Wrong invite code"
 msgstr "Код инвайта неверен"
 
-#: ../wp-invites.php:465 ../wp-invites.php:491
+#: ../wp-invites.php:471 ../wp-invites.php:497
 msgid "No code assigned"
 msgstr "Нет кода инвайта"
 
-#: ../wp-invites.php:495
+#: ../wp-invites.php:501
 msgid "Invitation code"
 msgstr "Инвайт код"
