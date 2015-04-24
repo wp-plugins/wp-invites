@@ -2,7 +2,7 @@
 Author: Jehy
 Tags: captcha,registration,user,admin,access,authenification,register
 Requires at least: 4.0
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: 2.50
 Invites system for wordpress, wordpress MU and buddypress!
 
